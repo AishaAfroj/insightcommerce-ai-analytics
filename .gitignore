@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.DS_Store
+.env
+.streamlit/secrets.toml
+data/processed/*.parquet
+data/processed/*.json
+artifacts/models/*.joblib
+artifacts/exports/*
+!artifacts/exports/.gitkeep
+tmp/

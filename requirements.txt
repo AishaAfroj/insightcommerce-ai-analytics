@@ -1,0 +1,14 @@
+duckdb==1.4.0
+kaleido==1.1.0
+numpy==2.3.3
+pandas==2.3.3
+plotly==6.3.0
+pyarrow==21.0.0
+pydantic==2.11.9
+python-docx==1.2.0
+reportlab==4.4.4
+requests==2.32.5
+scikit-learn==1.7.2
+sqlglot==27.20.0
+streamlit==1.49.1
+
