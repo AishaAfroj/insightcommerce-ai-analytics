@@ -540,7 +540,12 @@ def generate_report() -> Path:
             ),
             Spacer(1, 0.18 * inch),
             Paragraph("Submission date: 17 August 2026", styles["cover_meta"]),
-            Spacer(1, 0.14 * inch),
+            Paragraph(
+                'Project repository: <link href="https://github.com/AishaAfroj/insightcommerce-ai-analytics" '
+                'color="#2563EB"><u>https://github.com/AishaAfroj/insightcommerce-ai-analytics</u></link>',
+                styles["small"],
+            ),
+            Spacer(1, 0.08 * inch),
             callout(
                 "Group capstone evidence: a verified 108,300-row dataset, 21 passing tests, "
                 "a 10/10 query benchmark, and filtered aggregation below 3 ms on our development Mac.",
@@ -1003,6 +1008,13 @@ streamlit run app.py"""
             "schema-aware AI engine; dashboard and advanced analytics; submission documentation and "
             "evaluation; and final report/package. This avoids a prohibited single-commit submission "
             "and makes review traceable.",
+            styles["body"],
+        )
+    )
+    story.append(
+        Paragraph(
+            '<b>GitHub repository:</b> <link href="https://github.com/AishaAfroj/insightcommerce-ai-analytics" '
+            'color="#2563EB"><u>https://github.com/AishaAfroj/insightcommerce-ai-analytics</u></link>',
             styles["body"],
         )
     )
