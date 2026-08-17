@@ -108,6 +108,11 @@ class AnalyticsDatabase:
         with self._lock:
             self._connection.close()
 
+    def interrupt(self) -> None:
+        """Request cancellation of a running DuckDB query."""
+
+        self._connection.interrupt()
+
     def __enter__(self) -> AnalyticsDatabase:
         return self
 

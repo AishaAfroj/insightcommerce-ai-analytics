@@ -28,7 +28,7 @@ class LLMSettings:
     ollama_base_url: str = "http://localhost:11434"
     ollama_model: str = "llama3.1:8b"
     openai_api_key: str = ""
-    openai_model: str = "gpt-4.1-mini"
+    openai_model: str = "gpt-5-mini"
     timeout_seconds: int = 45
 
     @classmethod
@@ -40,7 +40,7 @@ class LLMSettings:
             ollama_base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434").rstrip("/"),
             ollama_model=os.getenv("OLLAMA_MODEL", "llama3.1:8b"),
             openai_api_key=os.getenv("OPENAI_API_KEY", ""),
-            openai_model=os.getenv("OPENAI_MODEL", "gpt-4.1-mini"),
+            openai_model=os.getenv("OPENAI_MODEL", "gpt-5-mini"),
             timeout_seconds=int(os.getenv("LLM_TIMEOUT_SECONDS", "45")),
         )
 
@@ -50,4 +50,3 @@ def ensure_output_directories() -> None:
 
     for directory in (PROCESSED_DIR, MODEL_DIR, BENCHMARK_DIR, EXPORT_DIR, REPORT_DIR):
         directory.mkdir(parents=True, exist_ok=True)
-
