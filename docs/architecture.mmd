@@ -1,0 +1,17 @@
+flowchart LR
+    A["Kaggle CSV\n108,300 x 10"] --> B["Schema validation\nQuality profiling"]
+    B --> C["Zstd Parquet\n18 analytics fields"]
+    C --> D["DuckDB\nparameterized filters"]
+    U["User questions\nand filters"] --> S["Streamlit UI\n5 sections"]
+    S --> P["Schema-aware prompt\n+ 5-turn memory"]
+    P --> L["LLM planner\nOllama / OpenAI"]
+    L --> G["SQL AST safety gate\nSELECT-only + timeout"]
+    G --> D
+    D --> R["Grounded DataFrame"]
+    R --> V["8 interactive charts\nauto + manual override"]
+    R --> N["Grounded narrative"]
+    C --> M["Demand prediction\n+ anomaly detection"]
+    V --> E["PDF / DOCX / CSV\nHTML / PNG exports"]
+    N --> E
+    M --> E
+

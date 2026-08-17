@@ -13,3 +13,4 @@ artifacts/models/*.joblib
 artifacts/exports/*
 !artifacts/exports/.gitkeep
 tmp/
+dist/

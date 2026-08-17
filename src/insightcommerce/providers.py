@@ -121,6 +121,36 @@ class RuleBasedProvider:
 
     @staticmethod
     def _plan(question: str) -> dict[str, str]:
+        if "total revenue" in question:
+            return {
+                "sql": "SELECT SUM(order_value) AS total_revenue FROM orders",
+                "title": "Total revenue",
+                "chart_type": "metric",
+                "x": "",
+                "y": "total_revenue",
+                "color": "",
+                "rationale": "Summing order value produces the dataset's total simulated revenue.",
+            }
+        if "how many orders" in question or "order count" in question:
+            return {
+                "sql": "SELECT COUNT(*) AS orders FROM orders",
+                "title": "Total order count",
+                "chart_type": "metric",
+                "x": "",
+                "y": "orders",
+                "color": "",
+                "rationale": "Counting transaction rows produces the total number of orders.",
+            }
+        if "units" in question or "quantity sold" in question:
+            return {
+                "sql": "SELECT SUM(quantity) AS units FROM orders",
+                "title": "Total units sold",
+                "chart_type": "metric",
+                "x": "",
+                "y": "units",
+                "color": "",
+                "rationale": "Summing quantity produces the total number of simulated units sold.",
+            }
         if "monthly" in question or "trend" in question or "over time" in question:
             return {
                 "sql": "SELECT date_trunc('month', date) AS month, SUM(order_value) AS revenue FROM orders GROUP BY 1 ORDER BY 1",
@@ -141,7 +171,7 @@ class RuleBasedProvider:
                 "color": "",
                 "rationale": "Quarterly revenue and order counts expose the modeled Q4 seasonality.",
             }
-        if "category" in question:
+        if "categor" in question:
             return {
                 "sql": "SELECT product_category, SUM(order_value) AS revenue, COUNT(*) AS orders FROM orders GROUP BY 1 ORDER BY revenue DESC",
                 "title": "Revenue by product category",
@@ -194,4 +224,3 @@ def build_provider(name: str, settings: LLMSettings | None = None) -> LLMProvide
     if normalized in {"offline", "fallback", "offline-fallback"}:
         return RuleBasedProvider()
     raise ValueError(f"Unknown LLM provider: {name}")
-

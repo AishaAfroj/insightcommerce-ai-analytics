@@ -17,7 +17,7 @@ ARTIFACTS_DIR = PROJECT_ROOT / "artifacts"
 MODEL_DIR = ARTIFACTS_DIR / "models"
 BENCHMARK_DIR = ARTIFACTS_DIR / "benchmarks"
 EXPORT_DIR = ARTIFACTS_DIR / "exports"
-REPORT_DIR = PROJECT_ROOT / "reports" / "final"
+REPORT_DIR = PROJECT_ROOT / "output" / "pdf"
 
 
 @dataclass(frozen=True)

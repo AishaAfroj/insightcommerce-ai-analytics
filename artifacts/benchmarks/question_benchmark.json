@@ -1,0 +1,127 @@
+{
+  "benchmark": "ten_question_accuracy",
+  "executed_at_utc": "2026-08-17T05:59:05.767102+00:00",
+  "provider": "offline-fallback",
+  "questions": 10,
+  "passed": 10,
+  "accuracy": 1.0,
+  "criteria_per_question": [
+    "exact numeric/tabular result",
+    "required result columns",
+    "compatible chart recommendation",
+    "success without retry",
+    "non-empty grounded narrative"
+  ],
+  "results": [
+    {
+      "id": 1,
+      "question": "What is the total revenue?",
+      "exact_result": true,
+      "required_columns": true,
+      "chart_valid": true,
+      "attempts": 1,
+      "grounded_narrative": true,
+      "execution_ms": 0.647,
+      "status": "PASS"
+    },
+    {
+      "id": 2,
+      "question": "How many orders are there?",
+      "exact_result": true,
+      "required_columns": true,
+      "chart_valid": true,
+      "attempts": 1,
+      "grounded_narrative": true,
+      "execution_ms": 0.346,
+      "status": "PASS"
+    },
+    {
+      "id": 3,
+      "question": "How many units were sold?",
+      "exact_result": true,
+      "required_columns": true,
+      "chart_valid": true,
+      "attempts": 1,
+      "grounded_narrative": true,
+      "execution_ms": 0.482,
+      "status": "PASS"
+    },
+    {
+      "id": 4,
+      "question": "Show the monthly revenue trend for 2025.",
+      "exact_result": true,
+      "required_columns": true,
+      "chart_valid": true,
+      "attempts": 1,
+      "grounded_narrative": true,
+      "execution_ms": 2.424,
+      "status": "PASS"
+    },
+    {
+      "id": 5,
+      "question": "Which countries generated the most revenue?",
+      "exact_result": true,
+      "required_columns": true,
+      "chart_valid": true,
+      "attempts": 1,
+      "grounded_narrative": true,
+      "execution_ms": 2.489,
+      "status": "PASS"
+    },
+    {
+      "id": 6,
+      "question": "Which country has the highest average order value?",
+      "exact_result": true,
+      "required_columns": true,
+      "chart_valid": true,
+      "attempts": 1,
+      "grounded_narrative": true,
+      "execution_ms": 2.225,
+      "status": "PASS"
+    },
+    {
+      "id": 7,
+      "question": "Show the top 10 products by revenue.",
+      "exact_result": true,
+      "required_columns": true,
+      "chart_valid": true,
+      "attempts": 1,
+      "grounded_narrative": true,
+      "execution_ms": 2.905,
+      "status": "PASS"
+    },
+    {
+      "id": 8,
+      "question": "Compare revenue across product categories.",
+      "exact_result": true,
+      "required_columns": true,
+      "chart_valid": true,
+      "attempts": 1,
+      "grounded_narrative": true,
+      "execution_ms": 2.402,
+      "status": "PASS"
+    },
+    {
+      "id": 9,
+      "question": "Compare every quarter and highlight Q4 performance.",
+      "exact_result": true,
+      "required_columns": true,
+      "chart_valid": true,
+      "attempts": 1,
+      "grounded_narrative": true,
+      "execution_ms": 1.083,
+      "status": "PASS"
+    },
+    {
+      "id": 10,
+      "question": "What are the leading products by revenue?",
+      "exact_result": true,
+      "required_columns": true,
+      "chart_valid": true,
+      "attempts": 1,
+      "grounded_narrative": true,
+      "execution_ms": 2.735,
+      "status": "PASS"
+    }
+  ]
+}
