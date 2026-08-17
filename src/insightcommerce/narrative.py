@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import math
+from datetime import date, datetime
 
 import pandas as pd
 
@@ -15,8 +16,10 @@ def format_value(value: object) -> str:
         if math.isfinite(number) and abs(number) >= 1_000:
             return f"{number:,.2f}"
         return f"{number:.2f}".rstrip("0").rstrip(".")
-    if isinstance(value, pd.Timestamp):
+    if isinstance(value, (pd.Timestamp, datetime)):
         return value.date().isoformat()
+    if isinstance(value, date):
+        return value.isoformat()
     return str(value)
 
 
@@ -35,9 +38,9 @@ def narrate_result(frame: pd.DataFrame, title: str) -> str:
         ordered = frame.sort_values(metric, ascending=False)
         leader = ordered.iloc[0]
         return (
-            f"{title}: {leader[labels[0]]} has the highest {metric.replace('_', ' ')} "
+            f"{title}: {format_value(leader[labels[0]])} has the highest "
+            f"{metric.replace('_', ' ')} "
             f"in this result at {format_value(leader[metric])}. The table contains "
             f"{len(frame):,} grouped rows."
         )
     return f"{title}: the executed query returned {len(frame):,} rows and {len(frame.columns)} columns."
-

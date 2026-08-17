@@ -1,6 +1,6 @@
 {
   "benchmark": "filtered_monthly_aggregation",
-  "executed_at_utc": "2026-08-17T05:40:38.568800+00:00",
+  "executed_at_utc": "2026-08-17T05:55:48.799901+00:00",
   "iterations": 30,
   "filters": {
     "date": [
@@ -13,9 +13,9 @@
       "Germany"
     ]
   },
-  "median_ms": 2.444,
-  "p95_ms": 2.627,
-  "max_ms": 2.632,
+  "median_ms": 2.522,
+  "p95_ms": 2.66,
+  "max_ms": 2.708,
   "threshold_ms": 500,
   "status": "PASS"
 }
