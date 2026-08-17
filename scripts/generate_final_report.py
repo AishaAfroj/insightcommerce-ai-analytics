@@ -52,7 +52,7 @@ GRID = colors.HexColor("#CBD5E1")
 FONT = "/System/Library/Fonts/Supplemental/Arial.ttf"
 FONT_BOLD = "/System/Library/Fonts/Supplemental/Arial Bold.ttf"
 ASSET_DIR = PROJECT_ROOT / "tmp" / "pdfs" / "report_assets"
-OUTPUT_PATH = REPORT_DIR / "InsightCommerce_Capstone_Report_Aisha_Afroj.pdf"
+OUTPUT_PATH = REPORT_DIR / "InsightCommerce_Group_Capstone_Report.pdf"
 
 
 def pil_font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
@@ -312,6 +312,24 @@ def create_styles() -> dict[str, ParagraphStyle]:
             textColor=SLATE,
             spaceAfter=3,
         ),
+        "cover_card": ParagraphStyle(
+            "CoverCard",
+            parent=base["BodyText"],
+            fontName="Helvetica",
+            fontSize=8.7,
+            leading=12.2,
+            textColor=NAVY,
+            spaceAfter=0,
+        ),
+        "course": ParagraphStyle(
+            "Course",
+            parent=base["Normal"],
+            fontName="Helvetica-Bold",
+            fontSize=12,
+            leading=15,
+            textColor=BLUE,
+            alignment=TA_CENTER,
+        ),
         "cover_kicker": ParagraphStyle(
             "CoverKicker",
             parent=base["Normal"],
@@ -404,7 +422,7 @@ def page_decor(canvas, document) -> None:
         canvas.drawString(0.72 * inch, 10.48 * inch, "INSIGHTCOMMERCE CAPSTONE REPORT")
         canvas.setFont("Helvetica", 8)
         canvas.setFillColor(SLATE)
-        canvas.drawRightString(7.78 * inch, 0.48 * inch, f"Aisha Afroj  |  Page {page}")
+        canvas.drawRightString(7.78 * inch, 0.48 * inch, f"InsightCommerce Group Project  |  Page {page}")
         canvas.line(0.72 * inch, 0.62 * inch, 7.78 * inch, 0.62 * inch)
     canvas.restoreState()
 
@@ -446,7 +464,7 @@ def generate_report() -> Path:
         topMargin=0.72 * inch,
         bottomMargin=0.78 * inch,
         title="InsightCommerce Capstone Report",
-        author="Aisha Afroj",
+        author="MD. Shahriar Ahamed Ridoy; Aisha Afroj",
         subject="AI-Powered E-Commerce Analytics and Decision Intelligence Platform",
     )
     story: list = []
@@ -467,39 +485,65 @@ def generate_report() -> Path:
     )
     story.extend(
         [
-            Spacer(1, 0.55 * inch),
+            Spacer(1, 0.28 * inch),
             kicker,
-            Spacer(1, 0.62 * inch),
+            Spacer(1, 0.30 * inch),
             Paragraph("InsightCommerce", styles["title"]),
             Paragraph(
                 "An AI-Powered E-Commerce Analytics and Decision Intelligence Platform",
                 styles["subtitle"],
             ),
             Table([[""]], colWidths=[7.05 * inch], rowHeights=[0.08 * inch], style=[("BACKGROUND", (0, 0), (-1, -1), BLUE)]),
-            Spacer(1, 0.58 * inch),
-            Paragraph("Prepared by", styles["small"]),
-            Paragraph("<b>Aisha Afroj</b>", styles["cover_meta"]),
-            Spacer(1, 0.16 * inch),
-            Paragraph("Submission date", styles["small"]),
-            Paragraph("17 August 2026", styles["cover_meta"]),
-            Spacer(1, 0.42 * inch),
-            styled_table(
+            Spacer(1, 0.26 * inch),
+            Paragraph("Course Title: Deep Learning", styles["course"]),
+            Spacer(1, 0.18 * inch),
+            Table(
                 [
-                    ["Dataset", "Synthetic E-Commerce Electronic Sales 2025"],
-                    ["Source", "Kaggle - Wojciech Kiełbowicz"],
-                    ["Verified size", "108,300 transactions x 10 source fields"],
-                    ["Application", "Streamlit + DuckDB + Plotly + scikit-learn"],
-                    ["AI query modes", "Ollama, optional OpenAI, offline demo fallback"],
+                    [
+                        Paragraph(
+                            "<b>Submitted by</b><br/><br/>"
+                            "<b>MD. Shahriar Ahamed Ridoy</b><br/>"
+                            "ID: 261-25-008<br/>"
+                            "M.Sc. in CSE (Major in Data Science)<br/>"
+                            "Daffodil International University<br/><br/>"
+                            "<b>Aisha Afroj</b><br/>"
+                            "ID: 261-25-007<br/>"
+                            "M.Sc. in CSE (Major in Data Science)<br/>"
+                            "Daffodil International University",
+                            styles["cover_card"],
+                        ),
+                        Paragraph(
+                            "<b>Submitted to</b><br/><br/>"
+                            "<b>Sadat Hasan</b><br/>"
+                            "Adjunct Faculty<br/>"
+                            "Department of Computer Science and Engineering (CSE)<br/>"
+                            "Faculty of Science and Information Technology (FSIT)<br/>"
+                            "Daffodil International University",
+                            styles["cover_card"],
+                        ),
+                    ]
                 ],
-                [1.45 * inch, 5.6 * inch],
-                header=False,
-                font_size=9.2,
+                colWidths=[3.52 * inch, 3.53 * inch],
+                style=TableStyle(
+                    [
+                        ("BACKGROUND", (0, 0), (0, 0), PALE_BLUE),
+                        ("BACKGROUND", (1, 0), (1, 0), PALE_SKY),
+                        ("BOX", (0, 0), (-1, -1), 0.7, GRID),
+                        ("INNERGRID", (0, 0), (-1, -1), 0.7, colors.white),
+                        ("VALIGN", (0, 0), (-1, -1), "TOP"),
+                        ("LEFTPADDING", (0, 0), (-1, -1), 12),
+                        ("RIGHTPADDING", (0, 0), (-1, -1), 12),
+                        ("TOPPADDING", (0, 0), (-1, -1), 11),
+                        ("BOTTOMPADDING", (0, 0), (-1, -1), 11),
+                    ]
+                ),
             ),
-            Spacer(1, 0.55 * inch),
+            Spacer(1, 0.18 * inch),
+            Paragraph("Submission date: 17 August 2026", styles["cover_meta"]),
+            Spacer(1, 0.14 * inch),
             callout(
-                "Submission evidence is reproducible from the repository: pinned dependencies, "
-                "21 passing tests, a 10/10 query benchmark, regular Git commits, and measured "
-                "filtered aggregation latency below 3 ms on the development Mac.",
+                "Group capstone evidence: a verified 108,300-row dataset, 21 passing tests, "
+                "a 10/10 query benchmark, and filtered aggregation below 3 ms on our development Mac.",
                 styles["callout"],
             ),
         ]
@@ -508,20 +552,20 @@ def generate_report() -> Path:
     # Page 2 - abstract
     section_page(story, "Abstract and project result", styles)
     abstract = (
-        "InsightCommerce is an end-to-end analytics application for a verified Kaggle dataset of "
-        "108,300 synthetic global electronics transactions from 2025. The system validates the "
-        "source schema, creates a quality profile, derives transparent calendar and product-taxonomy "
-        "features, stores optimized Parquet, and serves filtered aggregation through DuckDB. A "
-        "schema-aware assistant translates natural-language questions to a strict JSON query plan "
-        "and read-only SQL. An AST safety gate blocks mutation, external access, sensitive-shaped "
-        "fields, unrestricted star selection, excessive rows, and long execution; one corrective "
-        "retry and five-turn memory support reliable conversation. The Streamlit interface provides "
-        "global filters, preset insights, eight visualization types, AI chart recommendation with "
-        "manual override, and PDF, DOCX, CSV, HTML, and PNG export paths. Advanced features include "
-        "calendar-based daily demand prediction and Isolation Forest anomaly detection. Evaluation "
-        "recorded 21 passing automated tests, 10/10 benchmark questions, a 2.52 ms median filtered "
-        "aggregation, and a demand-model held-out R-squared of 0.995. The result is reproducible, "
-        "deployment-ready, and deliberately transparent about the synthetic data and model limits."
+        "We built InsightCommerce to make a large e-commerce dataset easier to explore and explain. "
+        "Our verified Kaggle file contains 108,300 synthetic electronics transactions from 2025. "
+        "We check the real schema, create a data-quality profile, derive documented calendar and "
+        "product-taxonomy fields, store optimized Parquet, and use DuckDB for fast aggregation. "
+        "The schema-aware assistant turns plain-English questions into a strict JSON plan and "
+        "read-only SQL. Before anything runs, an AST safety gate blocks data changes, external access, "
+        "sensitive-shaped fields, unrestricted star selection, excessive rows, and long execution. "
+        "The application also keeps five successful conversation turns and allows one corrective retry. "
+        "Its Streamlit interface includes global filters, preset insights, eight chart types, AI chart "
+        "suggestions with manual override, and PDF, DOCX, CSV, HTML, and PNG export paths. We added daily "
+        "demand prediction and Isolation Forest anomaly detection as advanced features. Our evaluation "
+        "produced 21 passing tests, 10/10 benchmark answers, a 2.52 ms median filtered aggregation, and "
+        "a held-out R-squared of 0.995. We report these results together with the limitations of using "
+        "synthetic, single-year data."
     )
     story.append(Paragraph(abstract, styles["body"]))
     story.append(Paragraph("Measured completion summary", styles["h2"]))
@@ -549,11 +593,11 @@ def generate_report() -> Path:
     section_page(story, "1. Introduction, objectives, and dataset scope", styles)
     story.append(
         Paragraph(
-            "Modern analytics users expect to move from a business question to a trustworthy result "
-            "without manually writing code. The project problem is therefore broader than a dashboard: "
-            "it requires a reproducible data layer, a bounded AI code-generation path, interactive "
-            "visual reasoning, exportable evidence, and advanced analytics that remain honest about "
-            "the dataset's limits.",
+            "For this capstone, we wanted to go beyond a dashboard that only displays fixed charts. "
+            "Our goal was to let a user move from a business question to a result they can inspect, "
+            "visualize, and export. That required a reproducible data layer, controlled AI-generated "
+            "queries, interactive charts, and advanced analytics that stay honest about the limits "
+            "of the dataset.",
             styles["body"],
         )
     )
@@ -587,14 +631,29 @@ def generate_report() -> Path:
             styles["body"],
         )
     )
+    story.append(Paragraph("Project team", styles["h2"]))
+    team_rows = [
+        ["Member", "Student ID", "Program"],
+        ["MD. Shahriar Ahamed Ridoy", "261-25-008", "M.Sc. in CSE (Major in Data Science)"],
+        ["Aisha Afroj", "261-25-007", "M.Sc. in CSE (Major in Data Science)"],
+    ]
+    story.append(styled_table(team_rows, [2.5 * inch, 1.15 * inch, 3.4 * inch], font_size=8))
+    story.append(Spacer(1, 0.08 * inch))
+    story.append(
+        Paragraph(
+            "We worked together across data preparation, application development, testing, "
+            "documentation, and presentation planning.",
+            styles["body"],
+        )
+    )
 
     # Page 4 - architecture
     section_page(story, "2. System architecture", styles)
     story.append(
         Paragraph(
-            "The architecture separates trusted preparation, interactive presentation, generated-code "
-            "control, and analytical outputs. DuckDB receives either parameterized application filters "
-            "or AST-validated generated SQL. No LLM receives raw customer names or email addresses.",
+            "We organized the project into clear layers so that each result can be traced. DuckDB "
+            "receives either parameterized dashboard filters or SQL that has already passed the AST "
+            "safety check. Raw customer names and email addresses are never sent to an LLM.",
             styles["body"],
         )
     )
@@ -614,8 +673,9 @@ def generate_report() -> Path:
     section_page(story, "3. Task A - data backend and performance", styles)
     story.append(
         Paragraph(
-            "The raw ZIP checksum is 81a80e884aeaf28f6816af25fa334dbcd712716337208194c5b451be339b63db. "
-            "The preparation command verifies exact column order, parses dates and numerics, strips "
+            "We started by verifying the downloaded file instead of assuming its columns. The raw ZIP "
+            "checksum is 81a80e884aeaf28f6816af25fa334dbcd712716337208194c5b451be339b63db. "
+            "Our preparation command checks the exact column order, parses dates and numerics, strips "
             "identifier whitespace, enforces unique order IDs, confirms price x quantity, derives "
             "calendar/taxonomy fields, and writes Zstd-compressed Parquet plus JSON metadata.",
             styles["body"],
@@ -650,9 +710,9 @@ def generate_report() -> Path:
     section_page(story, "4. Task B - schema-aware AI and safe text-to-code", styles)
     story.append(
         Paragraph(
-            "Each question is combined with the public schema catalog and at most five previous "
-            "successful turns. The model must return a strict QueryPlan containing SQL, chart type, "
-            "result field mapping, title, and rationale. The SQL is never executed directly.",
+            "When a user asks a question, we combine it with the public schema catalog and at most five "
+            "previous successful turns. The model must return a strict QueryPlan containing SQL, chart "
+            "type, result fields, a title, and a rationale. We never execute model-generated SQL directly.",
             styles["body"],
         )
     )
@@ -688,7 +748,7 @@ def generate_report() -> Path:
     section_page(story, "5. Task C - interactive application", styles)
     story.append(
         Paragraph(
-            "The Streamlit application is organized into Overview, Visual Explorer, AI Analyst, "
+            "We divided the Streamlit application into Overview, Visual Explorer, AI Analyst, "
             "Prediction & Anomalies, and Reports & Quality. Date, country, and product-category filters "
             "apply consistently across the dashboard. The default overview remains legible at a tested "
             "1600 x 1000 desktop viewport with no horizontal overflow or application exceptions.",
@@ -713,9 +773,10 @@ def generate_report() -> Path:
     story.append(Paragraph("Figure 3. Measured 2025 revenue pattern and strongest country markets.", styles["caption"]))
     story.append(
         Paragraph(
-            "The source intentionally weights Q4. Revenue is roughly $6-7 million per month from "
-            "January through October, then rises above $33 million in both November and December. "
-            "This is a modeled pattern, not evidence about a real company. USA leads total revenue "
+            "When we reviewed the yearly pattern, revenue stayed near $6-7 million per month from "
+            "January through October, then rose above $33 million in both November and December. "
+            "The source intentionally weights Q4, so this is a modeled pattern rather than evidence "
+            "about a real company. USA leads total revenue "
             "because the synthetic generator also assigns different country record volumes.",
             styles["body"],
         )
@@ -818,8 +879,8 @@ def generate_report() -> Path:
     story.append(Paragraph("Browser walkthrough", styles["h2"]))
     story.append(
         Paragraph(
-            "The application was launched on the development Mac and exercised through the browser. "
-            "All five primary tabs and both nested advanced/report tabs were opened. The offline monthly "
+            "We launched the application on our development Mac and tested it through the browser. "
+            "We opened all five primary tabs and both nested advanced/report tabs. The offline monthly "
             "AI question executed in one attempt at 6.70 ms. An initial duplicate Plotly element ID was "
             "observed between hidden tabs, fixed with unique keys, and reverified. Final snapshots showed "
             "zero Streamlit exception elements and no horizontal overflow at 1600 x 1000.",
@@ -838,7 +899,7 @@ def generate_report() -> Path:
     section_page(story, "10. Ten-question accuracy benchmark", styles)
     story.append(
         Paragraph(
-            "The benchmark exercises the full offline question path: natural-language plan selection, "
+            "We used ten representative questions to test the full offline path: natural-language plan selection, "
             "strict plan parsing, SQL safety validation, DuckDB execution, chart compatibility, and "
             "grounded narration. Each result is compared with independently executed reference SQL.",
             styles["body"],
@@ -911,8 +972,8 @@ def generate_report() -> Path:
     section_page(story, "12. Reproducibility and deployment preparation", styles)
     story.append(
         Paragraph(
-            "A clean environment can reproduce the application with the pinned requirements and "
-            "included raw data. Generated Parquet and quality files are intentionally rebuilt.",
+            "We included pinned requirements and the raw data so a clean environment can reproduce the "
+            "application. Parquet and quality files are rebuilt rather than treated as hidden inputs.",
             styles["body"],
         )
     )
@@ -961,8 +1022,8 @@ streamlit run app.py"""
     story.append(Paragraph("Future work", styles["h2"]))
     story.append(
         Paragraph(
-            "With instructor approval and a richer real dataset, future versions should add product "
-            "cost/profit, discount, shipping, return status, and customer segment fields; evaluate "
+            "If we continue this work with instructor approval and a richer real dataset, we would add "
+            "product cost/profit, discount, shipping, return status, and customer segment fields; evaluate "
             "rolling multi-year forecasts; add authenticated user roles and audit logs; benchmark "
             "multiple live LLMs; and deploy managed observability with rate limits and query traces.",
             styles["body"],
@@ -971,11 +1032,11 @@ streamlit run app.py"""
     story.append(Paragraph("Conclusion", styles["h2"]))
     story.append(
         Paragraph(
-            "InsightCommerce fulfills Tasks A-D as an integrated, testable application. Its strongest "
-            "contribution is not a single chart or model, but the controlled chain from verified data "
-            "through generated code to a grounded, exportable result. The final system is fast, visually "
-            "complete, privacy-conscious, reproducible, and explicit about what the dataset can and "
-            "cannot support.",
+            "By completing InsightCommerce, we met Tasks A-D in one integrated and testable application. "
+            "For us, the most important result is not one chart or model; it is the controlled path from "
+            "a verified file to generated code, checked execution, and an exportable answer. The project "
+            "is fast, visually complete, privacy-conscious, reproducible, and clear about what this "
+            "synthetic dataset can and cannot support.",
             styles["body"],
         )
     )
