@@ -75,6 +75,17 @@ planner for no-credential evaluation.
 
 Python 3.12 is recommended.
 
+For this prepared Mac, double-click `start_app.command` or run:
+
+```bash
+./start_app.command
+```
+
+See the [presentation and feature-testing guide](docs/PRESENTATION_DEMO_GUIDE.md)
+for the exact rehearsal sequence and expected results.
+
+For a new environment, use the full setup below.
+
 ```bash
 cd insightcommerce-ai-analytics
 python3.12 -m venv .venv
