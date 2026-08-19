@@ -113,6 +113,18 @@ ollama serve
 Keep the default values in `.env.example` as environment variables, then select
 **Ollama (local LLM)** in the AI Analyst tab.
 
+To use another installed model, set it before starting Streamlit, for example:
+
+```bash
+export OLLAMA_MODEL=qwen3:8b
+export LLM_TIMEOUT_SECONDS=120
+./start_app.command
+```
+
+The Ollama adapter requests portable JSON output. The app then applies the same
+strict `QueryPlan` validation, read-only SQL safety gate, row limit, timeout, and
+single corrective retry before any generated query can run.
+
 ### Optional hosted OpenAI provider
 
 Set secrets outside Git, then select **OpenAI (hosted, optional)**:

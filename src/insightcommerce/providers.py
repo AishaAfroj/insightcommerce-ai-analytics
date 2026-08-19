@@ -11,6 +11,20 @@ import requests
 from .config import LLMSettings
 from .query_models import query_plan_json_schema
 
+OLLAMA_JSON_CONTRACT = """OUTPUT CONTRACT FOR OLLAMA JSON MODE
+Return exactly one flat JSON object with all seven keys shown below and no other keys:
+{
+  "sql": "one DuckDB SELECT query",
+  "title": "short result title",
+  "chart_type": "auto|table|metric|bar|line|area|scatter|histogram|box|heatmap|choropleth|treemap",
+  "x": "exact result column name or empty string",
+  "y": "exact result column name or empty string",
+  "color": "exact result column name or empty string",
+  "rationale": "short explanation of the grouping and metric"
+}
+Do not rename keys. Do not nest chart fields. Return JSON only.
+"""
+
 
 class LLMProviderError(RuntimeError):
     """Raised when an LLM endpoint is unavailable or returns unusable content."""
@@ -37,13 +51,21 @@ class OllamaProvider:
         payload = {
             "model": self.settings.ollama_model,
             "messages": [
-                {"role": "system", "content": system_prompt},
+                {
+                    "role": "system",
+                    "content": f"{system_prompt}\n\n{OLLAMA_JSON_CONTRACT}",
+                },
                 {"role": "user", "content": user_prompt},
             ],
             "stream": False,
-            "format": query_plan_json_schema(),
+            "think": False,
+            # Ollama JSON mode is more portable than its model-specific grammar
+            # compiler. QueryPlan validation and the SQL safety gate still enforce
+            # the strict contract before any generated statement can execute.
+            "format": "json",
             "options": {"temperature": 0, "num_predict": 900},
         }
+        response = None
         try:
             response = requests.post(
                 f"{self.settings.ollama_base_url}/api/chat",
@@ -52,6 +74,10 @@ class OllamaProvider:
             )
             response.raise_for_status()
             return str(response.json()["message"]["content"])
+        except requests.HTTPError as exc:
+            detail = response.text.strip()[:700] if response is not None else str(exc)
+            status = response.status_code if response is not None else "unknown"
+            raise LLMProviderError(f"Ollama request failed ({status}): {detail}") from exc
         except (requests.RequestException, KeyError, TypeError, ValueError) as exc:
             raise LLMProviderError(f"Ollama request failed: {exc}") from exc
 
