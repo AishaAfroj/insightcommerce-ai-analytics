@@ -84,6 +84,11 @@ For this prepared Mac, double-click `start_app.command` or run:
 See the [presentation and feature-testing guide](docs/PRESENTATION_DEMO_GUIDE.md)
 for the exact rehearsal sequence and expected results.
 
+The finished 11-slide group deck is available as
+[InsightCommerce_Group_Presentation.pptx](output/presentation/InsightCommerce_Group_Presentation.pptx).
+It includes speaker notes, source blocks, the live-demo handoff, and the verified
+project results used in the final report.
+
 For a new environment, use the full setup below.
 
 ```bash
@@ -159,6 +164,7 @@ insightcommerce-ai-analytics/
 ├── artifacts/benchmarks/          Reproducible benchmark evidence
 ├── docs/                          Architecture, security, model, deployment notes
 ├── output/pdf/                    Final capstone PDF report
+├── output/presentation/           Final group PowerPoint with speaker notes
 ├── Dockerfile                     Container deployment
 ├── requirements.txt               Pinned runtime dependencies
 └── requirements-dev.txt           Pinned test and quality tools
